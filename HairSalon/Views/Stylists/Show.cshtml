@@ -1,4 +1,5 @@
-<h3>Here are all the Clients for this Stylist:</h3>
+<h3>Here are all the Clients for this Stylist: @Model["stylist"].GetName()</h3>
+
 
 <ol>
 @foreach (var client in @Model["clients"])
@@ -10,5 +11,4 @@
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a New Client</a></p>
 <p><a href='/stylists'>Return to Stylists Page</a></p>
 <p><a href='/'>Return to Main Page</a></p>
-
- @* @stylist.GetName() *@
+@* <p><a href '/stylists/delete'> Delete All Clients</a></p> *@

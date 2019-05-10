@@ -8,7 +8,7 @@
 
 _This program is in the eyes of an employee. The employee will be able to hire a hair stylist. They will also be able to give the hair stylists clients. The information for the hair stylists and the clients will be stored and retrieved from a SQL database._
 
-##SQL
+## Recreate SQL Database
 ```sql
 CREATE DATABASE first_last;
 USE first_last;
@@ -21,9 +21,11 @@ CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(1
 |-|-|-|
 |Enter a name for stylist should return same name|"Liv"|"Liv"|
 |Enter a name for client should return same name|"Jesse"|"Jesse"|
-||||
-||||
-||||
+|Click View Stylists anchor tag will redirect user to view all stylists. If no stylists have been added, list will be blank. |Click View Stylist|Redirects to Stylists index page|
+|Click the Hire anchor tag to redirect to a stylist hire form page|Click Hire Stylist|Redirects to stylists New.cshtml page|
+|Click name of Stylist to redirect to client list page|Click "Lilly"|Redirects to "Lilly's" client list page|
+|Click Add new Client to redirect to new client form page|Click Add Client|Redirect to Client New.cshtml page|
+|Click Add client button to redirect back to Client list page|Click Add Client|Redirect to Client list page|
 
 
 
@@ -32,7 +34,15 @@ CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(1
 * _Clone Github repository_
 * _Open the command line_
 * _Change the directory to the Desktop_
-* _Open the file HairSalon.Solution_
+* _Change the directory to the file HairSalon.Solution_
+* _Open MAMP and start server_
+* _Open WebSart page if it didn't open already_
+* _Click on tools drop down menu bar and click on phpMyAdmin_
+* _Click on the Import tab to import the database from this project_
+* _Or redirect to the Recreate SQL Database section to make the Database_
+* _Change the directory to HairSalon_
+* _Use the Command dotnet run and copy the localhost5000 link_
+* _Paste the link into the url to open the Webpage_
 
 ## Support and contact details
 
