@@ -35,6 +35,7 @@ namespace HairSalon.Controllers
       model.Add("client", client);
       return View(model);
     }
+    
 
     [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
     public ActionResult Update(int stylistId, int clientId, string newName)
