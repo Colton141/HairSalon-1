@@ -48,10 +48,10 @@ namespace HairSalon.Controllers
       return View("Show", model);
     }
 
-    [HttpPost("/clients/delete")]
+    [HttpPost("/stylists/delete")]
     public ActionResult DeleteAll()
     {
-      Client.ClearAll();
+      Stylist.ClearAll();
       return View();
     }
 

@@ -15,4 +15,6 @@
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a New Client</a></p>
 <p><a href='/stylists'>Return to Stylists Page</a></p>
 <p><a href='/'>Return to Main Page</a></p>
-@* <p><a href '/stylists/delete'> Delete All Clients</a></p> *@
+<form action='/stylists/@Model["stylist"].GetId()/clients/delete' method="post">
+  <button type="submit" name="delete">Delete ALL Clients</button>
+</form>
