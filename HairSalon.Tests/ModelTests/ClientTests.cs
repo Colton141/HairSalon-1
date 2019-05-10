@@ -6,100 +6,100 @@ using System;
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class ItemTest : IDisposable
+  public class ClientTest : IDisposable
   {
 
     public void Dispose()
     {
-      Item.ClearAll();
+      Client.ClearAll();
     }
 
-    public ItemTest()
+    public ClientTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=to_do_list_test;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=mathew_akre_test;";
     }
 
     [TestMethod]
-    public void ItemConstructor_CreatesInstanceOfItem_Item()
+    public void ClientConstructor_CreatesInstanceOfClient_Client()
     {
-      Item newItem = new Item("test");
-      Assert.AreEqual(typeof(Item), newItem.GetType());
+      Client newClient = new Client("test");
+      Assert.AreEqual(typeof(Client), newClient.GetType());
     }
 
     [TestMethod]
-    public void GetDescription_ReturnsDescription_String()
+    public void GetName_ReturnsName_String()
     {
       //Arrange
-      string description = "Walk the dog.";
-      Item newItem = new Item(description);
+      string name = "Susan";
+      Client newClient = new Client(name);
 
       //Act
-      string result = newItem.GetDescription();
+      string result = newClient.GetName();
 
       //Assert
-      Assert.AreEqual(description, result);
+      Assert.AreEqual(name, result);
     }
 
     [TestMethod]
-    public void SetDescription_SetDescription_String()
+    public void SetName_SetName_String()
     {
       //Arrange
-      string description = "Walk the dog.";
-      Item newItem = new Item(description);
+      string name = "Susan";
+      Client newClient = new Client(name);
 
       //Act
-      string updatedDescription = "Do the dishes";
-      newItem.SetDescription(updatedDescription);
-      string result = newItem.GetDescription();
+      string updatedName = "Jesse";
+      newClient.SetName(updatedName);
+      string result = newClient.GetName();
 
       //Assert
-      Assert.AreEqual(updatedDescription, result);
+      Assert.AreEqual(updatedName, result);
     }
 
     [TestMethod]
-    public void GetAll_ReturnsEmptyListFromDatabase_ItemList()
+    public void GetAll_ReturnsEmptyListFromDatabase_ClientList()
     {
       //Arrange
-      List<Item> newList = new List<Item> { };
+      List<Client> newList = new List<Client> { };
 
       //Act
-      List<Item> result = Item.GetAll();
+      List<Client> result = Client.GetAll();
 
       //Assert
       CollectionAssert.AreEqual(newList, result);
     }
 
     [TestMethod]
-    public void Equals_ReturnsTrueIfDescriptionAreTheSame_Item()
+    public void Equals_ReturnsTrueIfNameAreTheSame_Client()
     {
-      Item firstItem = new Item("Mow the lawn");
-      Item secondItem = new Item("Mow the lawn");
-      Assert.AreEqual(firstItem, secondItem);
+      Client firstClient = new Client("Lisa");
+      Client secondClient = new Client("Lisa");
+      Assert.AreEqual(firstClient, secondClient);
     }
     [TestMethod]
-    public void Save_SavesToDatabase_ItemList()
+    public void Save_SavesToDatabase_ClientList()
     {
-      Item testItem = new Item("Mow the lawn");
-      testItem.Save();
-      List<Item> result = Item.GetAll();
-      List<Item> testList = new List<Item>{testItem};
+      Client testClient = new Client("Lisa");
+      testClient.Save();
+      List<Client> result = Client.GetAll();
+      List<Client> testList = new List<Client>{testClient};
       CollectionAssert.AreEqual(testList, result);
     }
 
     [TestMethod]
-    public void GetAll_ReturnsItems_ItemList()
+    public void GetAll_ReturnsClients_ClientList()
     {
       //Arrange
-      string description01 = "Walk the dog";
-      string description02 = "Wash the dishes";
-      Item newItem1 = new Item(description01);
-      newItem1.Save();
-      Item newItem2 = new Item(description02);
-      newItem2.Save();
-      List<Item> newList = new List<Item> { newItem1, newItem2 };
+      string name01 = "Susan";
+      string name02 = "Sophie";
+      Client newClient1 = new Client(name01);
+      newClient1.Save();
+      Client newClient2 = new Client(name02);
+      newClient2.Save();
+      List<Client> newList = new List<Client> { newClient1, newClient2 };
 
       //Act
-      List<Item> result = Item.GetAll();
+      List<Client> result = Client.GetAll();
 
       //Assert
       CollectionAssert.AreEqual(newList, result);
@@ -108,22 +108,22 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Save_AssignsIdObject_Id()
     {
-      Item testItem = new Item("Mow the lawn");
-      testItem.Save();
-      Item savedItem = Item.GetAll()[0];
+      Client testClient = new Client("Susan");
+      testClient.Save();
+      Client savedClient = Client.GetAll()[0];
 
-      int result = savedItem.GetId();
-      int testId = testItem.GetId();
+      int result = savedClient.GetId();
+      int testId = testClient.GetId();
 
       Assert.AreEqual(testId, result);
 
     }
     // [TestMethod]
-    // public void GetId_ItemsInstantiateWithAnIdAndGetterReturns_Int()
+    // public void GetId_ClientsInstantiateWithAnIdAndGetterReturns_Int()
     // {
     //   //Arrange
-    //   string description = "Walk the dog.";
-    //   Item newItem = new Item(description);
+    //   string name = "Walk the dog.";
+    //   Item newItem = new Item(name);
     //
     //   //Act
     //   int result = newItem.GetId();
