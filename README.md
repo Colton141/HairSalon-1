@@ -32,6 +32,9 @@ CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(1
 ## Setup/Installation Requirements
 
 * _Clone Github repository_
+* _Install .Net Core SDK 2.2.203_
+* _Install MAMP_
+* _Install Mono_
 * _Open the command line_
 * _Change the directory to the Desktop_
 * _Change the directory to the file HairSalon.Solution_
@@ -44,6 +47,9 @@ CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(1
 * _Use the Command dotnet run and copy the localhost5000 link_
 * _Paste the link into the url to open the Webpage_
 
+## Known Bugs
+* _Adding multiple clients to the same stylist without returning back to the stylist page first can give clients a id of 0 which will not give them a stylist_
+
 ## Support and contact details
 
 _mwakre29@gmail.com_
@@ -52,6 +58,9 @@ _mwakre29@gmail.com_
 
 _C#_
 _SQL Database_
+_.NetCore SDK_
+_MAMP_
+_Mono_
 
 ### License
 
