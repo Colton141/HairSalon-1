@@ -140,7 +140,7 @@ namespace HairSalon.Models
         return allStylistClients;
       }
 
-      public static void DeleteAll()
+      public static void ClearAll()
       {
         MySqlConnection conn = DB.Connection();
         conn.Open();
