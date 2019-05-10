@@ -10,10 +10,10 @@ namespace HairSalon.Models
     private int _id;
     private int _stylistId;
 
-    public Client(string name, int stylistId, int id = 0)
+    public Client(string name, int stylist_id, int id = 0)
     {
       _name = name;
-      _stylistId = stylistId;
+      _stylistId = stylist_id;
       _id = id;
     }
 
@@ -82,15 +82,15 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (name, stylistId) VALUES (@ClientName, @ClientStylistId);";
+      cmd.CommandText = @"INSERT INTO clients (name, stylist_id) VALUES (@ClientName, @ClientStylistId);";
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@ClientName";
       name.Value = this._name;
-      MySqlParameter stylistId = new MySqlParameter();
-      stylistId.ParameterName = "@ClientStylistId";
-      stylistId.Value = this._stylistId;
+      MySqlParameter stylist_id = new MySqlParameter();
+      stylist_id.ParameterName = "@ClientStylistId";
+      stylist_id.Value = this._stylistId;
       cmd.Parameters.Add(name);
-      cmd.Parameters.Add(stylistId);
+      cmd.Parameters.Add(stylist_id);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -113,7 +113,7 @@ namespace HairSalon.Models
       {
         int clientId = rdr.GetInt32(0);
         string clientName = rdr.GetString(1);
-        int clientStylistId = rdr.GetInt32(3);
+        int clientStylistId = rdr.GetInt32(2);
         Client newClient = new Client(clientName, clientStylistId, clientId);
         allClients.Add(newClient);
       }
@@ -132,7 +132,7 @@ namespace HairSalon.Models
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"DELETE FROM clients;";
       cmd.ExecuteNonQuery();
-      conn.Close()
+      conn.Close();
       if (conn != null)
       {
         conn.Dispose();
@@ -159,7 +159,7 @@ namespace HairSalon.Models
         clientName = rdr.GetString(1);
         clientStylistId = rdr.GetInt32(2);
       }
-      Client foundClient = new Client(clientName, clientStylistId, clientId)
+      Client foundClient = new Client(clientName, clientStylistId, clientId);
       conn.Close();
       if (conn != null)
       {
@@ -167,7 +167,5 @@ namespace HairSalon.Models
       }
       return foundClient;
     }
-
-
   }
 }
