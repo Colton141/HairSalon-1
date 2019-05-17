@@ -41,7 +41,7 @@ namespace HairSalon.Controllers
       return View(model);
     }
 
-    [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
+    [HttpGet("/clients/{clientId}/edit")]
     public ActionResult Edit(int stylistId, int clientId)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
@@ -53,7 +53,7 @@ namespace HairSalon.Controllers
     }
 
 
-    [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
+    [HttpPost("/clients/{clientId}")]
     public ActionResult Update(int stylistId, int clientId, string newName)
     {
       Client client = Client.Find(clientId);

@@ -5,7 +5,10 @@
 }
 
 <h1>This is @Model["client"].GetName()</h1>
-<h2>Are you sure you want to Delete them</h2>
+
+
+<h4><a href="/clients"> Return to Client Page</a></h4>
+<h4><a href="/clients/@Model["client"].GetId()/edit"> Edit Client</a></h4>
 <form action='/clients/@Model["client"].GetId()/delete' method="post">
   <button class="btn btn-danger" type="submit" name="delete">Delete  Stylist</button>
 </form>
