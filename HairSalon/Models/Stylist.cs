@@ -136,7 +136,7 @@ namespace HairSalon.Models
           MySqlCommand clientQuery = new MySqlCommand(@"SELECT * FROM clients WHERE id = @SpecialtyId;", conn);
           clientQuery.Parameters.AddWithValue("@SpecialtyId", clientId);
           MySqlDataReader clientQueryRdr = clientQuery.ExecuteReader() as MySqlDataReader;
-          Console.WriteLine(clientId);
+
           while(clientQueryRdr.Read())
           {
             int thisClientId = clientQueryRdr.GetInt32(0);
