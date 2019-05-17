@@ -48,19 +48,19 @@ namespace HairSalon.Controllers
     }
     //
 
-    [HttpPost("/stylists/{stylistId}/clients")]
-    public ActionResult Create(int stylistId, string clientName)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist foundStylist = Stylist.Find(stylistId);
-      Client newClient = new Client(clientName, stylistId);
-      newClient.Save();
-      foundStylist.GetClients();
-      List<Client> stylistClient = foundStylist.GetClients();
-      model.Add("clients", stylistClient);
-      model.Add("stylist", foundStylist);
-      return View("Show", foundStylist);
-    }
+    // [HttpPost("/stylists/{stylistId}/clients")]
+    // public ActionResult Create(int stylistId, string clientName)
+    // {
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   Stylist foundStylist = Stylist.Find(stylistId);
+    //   Client newClient = new Client(clientName, stylistId);
+    //   newClient.Save();
+    //   foundStylist.GetClients();
+    //   List<Client> stylistClient = foundStylist.GetClients();
+    //   model.Add("clients", stylistClient);
+    //   model.Add("stylist", foundStylist);
+    //   return View("Show", foundStylist);
+    // }
 
     [HttpPost("/stylists/delete")]
     public ActionResult DeleteAll()
@@ -69,9 +69,17 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpPost("/stylists/{stylistId}/delete")]
+    public ActionResult Delete(int stylistId)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      stylist.Delete();
+      return RedirectToAction("Index");
+    }
 
 
-    [HttpPost("/stylists/{stylistId}/specialties")]
+
+    [HttpPost("/stylists/{stylistId}/specialties/new")]
     public ActionResult AddSpecialty(int stylistId, int specialtyId)
     {
       Stylist stylist = Stylist.Find(stylistId);
@@ -80,7 +88,7 @@ namespace HairSalon.Controllers
       return RedirectToAction("Show",  new { id = stylistId });
     }
 
-    [HttpPost("/stylists/{stylistId}/clients")]
+    [HttpPost("/stylists/{stylistId}/clients/new")]
     public ActionResult AddClient(int stylistId, int clientId)
     {
       Stylist stylist = Stylist.Find(stylistId);

@@ -1,1 +1,11 @@
+@using HairSalon.Models;
 
+@{
+  Layout = "_Layout";
+}
+
+<h1>This is @Model["client"].GetName()</h1>
+<h2>Are you sure you want to Delete them</h2>
+<form action='/clients/@Model["client"].GetId()/delete' method="post">
+  <button class="btn btn-danger" type="submit" name="delete">Delete  Stylist</button>
+</form>

@@ -171,15 +171,15 @@ namespace HairSalon.Models
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
 
-      // Specialty selectedSpecialty = Specialty.Find(specialtyId);
-      // Dictionary<string, object> model = new Dictionary<string, object>();
-      // List<Stylist> stylistSpecialty = selectedSpecialty.GetStylists();
-      // model.Add("specialty", selectedSpecialty);
-      //
-      // foreach (Stylist stylist in stylistSpecialty)
-      // {
-      //   stylist.Delete();
-      // }
+      Specialty selectedSpecialty = Specialty.Find(specialtyId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Stylist> stylistSpecialty = selectedSpecialty.GetStylists();
+      model.Add("specialty", selectedSpecialty);
+
+      foreach (Stylist stylist in stylistSpecialty)
+      {
+        stylist.Delete();
+      }
 
       cmd.CommandText = @"DELETE FROM specialties WHERE id = @thisId;";
       cmd.Parameters.AddWithValue("@thisId", _id);

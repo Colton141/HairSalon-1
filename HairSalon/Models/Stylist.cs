@@ -204,6 +204,22 @@ namespace HairSalon.Models
       {
         MySqlConnection conn = DB.Connection();
         conn.Open();
+        Stylist selectedStylist = Stylist.Find(stylistId);
+        Dictionary<string, object> model = new Dictionary<string, object>();
+        List<Client> stylistClient = selectedStylist.GetClients();
+        List<Specialty> stylistSpecialty = selectedStylist.GetSpecialties();
+        model.Add("stylist", selectedStylist);
+
+        foreach (Specialty client in stylistSpecialty)
+        {
+          client.Delete();
+        }
+
+        foreach (Specialty specialty in stylistSpecialty)
+        {
+          specialty.Delete();
+        }
+
         MySqlCommand cmd = new MySqlCommand(@"DELETE FROM stylists WHERE id = @thisId", conn);
         cmd.Parameters.AddWithValue("@thisId", _id);
         cmd.ExecuteNonQuery();
@@ -214,6 +230,19 @@ namespace HairSalon.Models
         }
 
 
+      }
+
+      public void Delete()
+      {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand("DELETE FROM stylists WHERE id = @StylistId; DELETE FROM stylists_clients WHERE stylist_id = @StylistId; DELETE FROM stylists_specialties WHERE stylist_id = @StylistId;", conn);
+        cmd.Parameters.AddWithValue("@StylistId", this.GetId());
+        cmd.ExecuteNonQuery();
+        if (conn != null)
+        {
+          conn.Close();
+        }
       }
 
       public void AddSpecialty (Specialty newSpecialty)
