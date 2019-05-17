@@ -36,10 +36,12 @@ namespace HairSalon.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist selectedStylist = Stylist.Find(id);
       List<Client> stylistClient = selectedStylist.GetClients();
+      List<Client> allClients = Client.GetAll();
       List<Specialty> stylistSpecialty = selectedStylist.GetSpecialties();
       List<Specialty> allSpecialties = Specialty.GetAll();
       model.Add("stylist", selectedStylist);
       model.Add("clients", stylistClient);
+      model.Add("allClients", allClients);
       model.Add("specialties", stylistSpecialty);
       model.Add("allSpecialties", allSpecialties);
       return View(model);
@@ -51,12 +53,13 @@ namespace HairSalon.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist foundStylist = Stylist.Find(stylistId);
-      Client newClient = new Client(clientName, foundStylist.GetId());
+      Client newClient = new Client(clientName, stylistId);
       newClient.Save();
+      foundStylist.GetClients();
       List<Client> stylistClient = foundStylist.GetClients();
       model.Add("clients", stylistClient);
-      model.Add("stylist", newClient);
-      return View("Show", model);
+      model.Add("stylist", foundStylist);
+      return View("Show", foundStylist);
     }
 
     [HttpPost("/stylists/delete")]
@@ -66,14 +69,9 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost("/stylists/{stylistId}/clients/delete")]
-    public ActionResult Clear()
-    {
-      Client.ClearAll();
-      return RedirectToAction("Index");
-    }
 
-    [HttpPost("/stylists/{stylistId}/specialties/new")]
+
+    [HttpPost("/stylists/{stylistId}/specialties")]
     public ActionResult AddSpecialty(int stylistId, int specialtyId)
     {
       Stylist stylist = Stylist.Find(stylistId);
@@ -81,6 +79,17 @@ namespace HairSalon.Controllers
       stylist.AddSpecialty(specialty);
       return RedirectToAction("Show",  new { id = stylistId });
     }
+
+    [HttpPost("/stylists/{stylistId}/clients")]
+    public ActionResult AddClient(int stylistId, int clientId)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      Client client = Client.Find(clientId);
+      stylist.AddClient(client);
+      return RedirectToAction("Show",  new { id = stylistId });
+    }
+
+
 
 
   }

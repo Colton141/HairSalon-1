@@ -7,14 +7,30 @@ namespace HairSalon.Controllers
   public class ClientsController : Controller
   {
 
-    [HttpGet("/stylists/{stylistId}/clients/new")]
-    public ActionResult New(int stylistId)
+    [HttpGet("/clients")]
+    public ActionResult Index()
     {
-       Stylist stylist = Stylist.Find(stylistId);
-       return View(stylist);
+      List<Client> allClients = Client.GetAll();
+      return View(allClients);
     }
 
-    [HttpGet("/stylists/{stylistId}/clients/{clientId}")]
+    [HttpGet("/clients/new")]
+    public ActionResult New()
+    {
+       return View();
+    }
+
+    [HttpPost("/clients")]
+    public ActionResult Create(string clientName)
+    {
+      Client newClient = new Client(clientName);
+      newClient.Save();
+      List<Client> allClients = Client.GetAll();
+      return RedirectToAction("Index", allClients);
+    }
+
+
+    [HttpGet("/clients/{clientId}")]
     public ActionResult Show(int stylistId, int clientId)
     {
       Client client = Client.Find(clientId);
@@ -35,7 +51,7 @@ namespace HairSalon.Controllers
       model.Add("client", client);
       return View(model);
     }
-    
+
 
     [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
     public ActionResult Update(int stylistId, int clientId, string newName)
@@ -49,6 +65,12 @@ namespace HairSalon.Controllers
       return View("Show", model);
     }
 
+    [HttpPost("/clients/delete")]
+    public ActionResult Clear()
+    {
+      Client.ClearAll();
+      return RedirectToAction("Index");
+    }
 
   }
 }

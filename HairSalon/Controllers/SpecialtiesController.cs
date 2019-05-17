@@ -39,7 +39,7 @@ namespace HairSalon.Controllers
       Specialty newSpecialty = new Specialty(specialtyName);
       newSpecialty.Save();
       List<Specialty> allSpecialties = Specialty.GetAll();
-      return View("Index", allSpecialties);
+      return RedirectToAction("Index", allSpecialties);
     }
 
 
