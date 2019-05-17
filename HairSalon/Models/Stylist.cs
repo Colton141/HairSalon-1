@@ -139,7 +139,6 @@ namespace HairSalon.Models
           Console.WriteLine(clientId);
           while(clientQueryRdr.Read())
           {
-            Console.WriteLine("AND Here works");
             int thisClientId = clientQueryRdr.GetInt32(0);
             string clientName = clientQueryRdr.GetString(1);
             Client foundClient = new Client(clientName, thisClientId);
