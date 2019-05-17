@@ -1,6 +1,6 @@
 # _Hair Salon_
 
-#### _This program will create a list of hair stylists that have their own list of clients. 5/10/2019_
+#### _This program will create a list of hair stylists that have their own list of clients. 5/17/2019_
 
 #### By _**Mathew Akre**_
 
@@ -10,8 +10,8 @@ _This program is in the eyes of an employee. The employee will be able to hire a
 
 ## Recreate SQL Database
 ```sql
-CREATE DATABASE first_last;
-USE first_last;
+CREATE DATABASE mathew_akre;
+USE mathew_akre;
 CREATE TABLE stylist (id serial PRIMARY KEY, name VARCHAR(255));
 CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(11));
 ```

@@ -22,7 +22,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void ClientConstructor_CreatesInstanceOfClient_Client()
     {
-      Client newClient = new Client("test", 1, 1);
+      Client newClient = new Client("test", 1);
       Assert.AreEqual(typeof(Client), newClient.GetType());
     }
 
@@ -31,7 +31,7 @@ namespace HairSalon.Tests
     {
       //Arrange
       string name = "Susan";
-      Client newClient = new Client(name, 1, 1);
+      Client newClient = new Client(name, 1);
 
       //Act
       string result = newClient.GetName();
@@ -45,7 +45,7 @@ namespace HairSalon.Tests
     {
       //Arrange
       string name = "Susan";
-      Client newClient = new Client(name, 1, 1);
+      Client newClient = new Client(name, 1);
 
       //Act
       string updatedName = "Jesse";
@@ -101,7 +101,7 @@ namespace HairSalon.Tests
     [TestMethod]
     public void Save_AssignsIdObject_Id()
     {
-      Client testClient = new Client("Susan", 1, 1);
+      Client testClient = new Client("Susan", 1);
       testClient.Save();
       Client savedClient = Client.GetAll()[0];
 
