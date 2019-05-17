@@ -13,7 +13,9 @@ _This program is in the eyes of an employee. The employee will be able to hire a
 CREATE DATABASE mathew_akre;
 USE mathew_akre;
 CREATE TABLE stylist (id serial PRIMARY KEY, name VARCHAR(255));
-CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255), stylist_id INT(11));
+CREATE TABLE clients (id serial PRIMARY KEY, name VARCHAR(255));
+CREATE TABLE specialties (id serial PRIMARY KEY, specialty_name VARCHAR(255));
+CREATE TABLE stylists_clients (id serial PRIMARY KEY, stylist_id INT(11), client_id INT(11));
 ```
 
 ## Specs

@@ -35,6 +35,11 @@ namespace HairSalon.Models
         return _name;
       }
 
+      public void SetName(string newStylist)
+      {
+        _name = newStylist;
+      }
+
       public int GetId()
       {
         return _id;
@@ -115,7 +120,7 @@ namespace HairSalon.Models
       {
         MySqlConnection conn = DB.Connection();
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand(@"SELECT stylist_id FROM stylists_clients WHERE stylist_id = @StylistId;", conn);
+        MySqlCommand cmd = new MySqlCommand(@"SELECT client_id FROM stylists_clients WHERE stylist_id = @StylistId;", conn);
         cmd.Parameters.AddWithValue("@StylistId", _id);
         MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
         List<int> clientIds = new List<int> {};
@@ -131,8 +136,10 @@ namespace HairSalon.Models
           MySqlCommand clientQuery = new MySqlCommand(@"SELECT * FROM clients WHERE id = @SpecialtyId;", conn);
           clientQuery.Parameters.AddWithValue("@SpecialtyId", clientId);
           MySqlDataReader clientQueryRdr = clientQuery.ExecuteReader() as MySqlDataReader;
+          Console.WriteLine(clientId);
           while(clientQueryRdr.Read())
           {
+            Console.WriteLine("AND Here works");
             int thisClientId = clientQueryRdr.GetInt32(0);
             string clientName = clientQueryRdr.GetString(1);
             Client foundClient = new Client(clientName, thisClientId);
@@ -148,11 +155,12 @@ namespace HairSalon.Models
         return clients;
       }
 
+
       public List<Specialty> GetSpecialties()
       {
         MySqlConnection conn = DB.Connection();
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand(@"SELECT stylist_id FROM stylists_specialties WHERE stylist_id = @StylistId;", conn);
+        MySqlCommand cmd = new MySqlCommand(@"SELECT specialty_id FROM stylists_specialties WHERE stylist_id = @StylistId;", conn);
         cmd.Parameters.AddWithValue("@StylistId", _id);
         MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
         List<int> specialtyIds = new List<int> {};
